@@ -12,13 +12,14 @@ keywords:
 - 博客
 - 搭建
 - 配置
-autoThumbnailImage: false
+autoThumbnailImage: true
 thumbnailImagePosition: "top"
-thumbnailImage: /img/hugo/rabstractoilpainting0.jpg
+thumbnailImage: /img/hugo/abstractoilpainting0S.jpg
 coverImage: /img/hugo/abstractoilpainting0.jpg
 metaAlignment: center
 ---
 很早之前就想自己搭建自己的个人博客，手上也有服务器、域名，一直拖到现在才开始做，记录下流程，以免以后忘了
+<!--more-->[注释]:(主页显示阅读全文位置)
 # 下载安装hugo
 
 ## Mac
@@ -100,9 +101,7 @@ hugo server
 ```
 在游览器中输入http://localhost:1313 就可以查看博客界面
 # 修改配置主题
-在博客根目录下找到config.toml文件
-
-博客本地的图片应放在static文件夹下，博客内引用填写方式为/img/hugo/whale.jpg
+在博客根目录下找到从主题下拷贝出的config.toml文件对其进行修改，这是我的配置文件[config.toml](https://github.com/bmi269/hugoPeakTheme/blob/master/config.toml)
 # 创建编写博客
 ```shell
 #创建博客
@@ -115,9 +114,75 @@ hugo new post/hugo博客.md
 在根目录content文件夹下就会生成post/hugo博客.md
 我试了下，md文件只有在post文件夹下才会在网页端显示
 # 服务器端安装Apache服务器
+在linux服务器上安装Apache服务器
+```shell
+sudo apt-get install apache2
+#安装apache文档与实用程序
+sudo apt-get install apache2-doc apache2-utils
+```
 
+检测apache运行状态与apache版本
+```shell
+systemctl systemctl status
+apache2 -V
+```
+更新防火墙，Ubuntu上最常用的防火墙是UFW，要允许通过80（http）和443（https）端口的流量
+```shell
+ufw allow 'Apache Full'
+```
+Apache2Buddy是一个可以自动调整 Apache 配置的脚本
+```shell
+curl -sL https://raw.githubusercontent.com/richardforth/apache2buddy/master/apache2buddy.pl | perl
+```
+
+为网站创建一个新的文件夹
+```shell
+#example.com是你的域名
+mkdir -p /var/www/example.com/public_html
+```
+设置目录权限
+```shell
+chown -R www-data:www-data /var/www/example.com
+chmod -R og-r /var/www/example.com
+```
+给网站创建一个新的虚拟主机
+```shell
+vim /etc/apache2/sites-available/example.com.conf
+```
+黏贴以下内容
+```shell
+#www.example.com是你的域名
+<VirtualHost *:80>
+     ServerAdmin admin@example.com
+     ServerName example.com
+     ServerAlias www.example.com
+   
+     DocumentRoot /var/www/example.com/public_html
+    
+     ErrorLog ${APACHE_LOG_DIR}/error.log
+     CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+启用虚拟主机
+```shell
+a2ensite example.com.conf
+```
+重启apache服务器，使更改生效
+```shell
+systemctl restart apache2
+```
+*这节内容来自[如何在 Ubuntu 上安装和优化 Apache](https://linux.cn/article-9679-1.html),这片文章中有更详细的apache服务器设置*
 # 博客网站上传服务器
+启动hugo后会在根目录下生成一个public文件夹，将public文件夹中的所有内容上传到服务器/var/www/example.com/public_html目录下
 
 # 添加评论功能
+hugo支持多个评论插件，Disqus需要注册账号，比较懒，就选择使用gitment。Disqus请参考[Comments](https://gohugo.io/content-management/comments/)
+由于我的域名还在备案所以gitment还没做,gitment请参考这个文章[Hugo 集成 Gitment 评论插件](https://www.qikqiak.com/post/hugo-integrated-gitment-plugin/)
+# 参考文章链接
+- [hugo官网](https://gohugo.io)
+- [手把手教你从0开始搭建自己的个人博客 |第二种姿势 | hugo](https://www.bilibili.com/video/av51574688)
+- [Hugo + Github Pages 搭建个人博客](https://juejin.im/post/5cc41bfef265da036505031c)
+- [在Ubuntu 18.04系统中安装和使用Hugo的方法](https://ywnz.com/linuxyffq/4334.html)
+- [Hugo 集成 Gitment 评论插件](https://www.qikqiak.com/post/hugo-integrated-gitment-plugin/)
+- [如何在 Ubuntu 上安装和优化 Apache](https://linux.cn/article-9679-1.html)
 
-<!--more-->
