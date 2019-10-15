@@ -173,7 +173,10 @@ systemctl restart apache2
 ```
 *这节内容来自[如何在 Ubuntu 上安装和优化 Apache](https://linux.cn/article-9679-1.html),这片文章中有更详细的apache服务器设置*
 # 博客网站上传服务器
-启动hugo后会在根目录下生成一个public文件夹，将public文件夹中的所有内容上传到服务器/var/www/example.com/public_html目录下
+```shell
+hugo --buildDrafts
+```
+在根目录下生成一个public文件夹，将public文件夹中的所有内容上传到服务器/var/www/example.com/public_html目录下
 
 # 添加评论功能
 hugo支持多个评论插件，Disqus需要注册账号，比较懒，就选择使用gitment。Disqus请参考[Comments](https://gohugo.io/content-management/comments/)
