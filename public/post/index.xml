@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on bmiStation</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on bmiStation</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 14 Oct 2019 21:30:06 +0800</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hugo博客搭建配置</title>
+      <link>/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Mon, 14 Oct 2019 21:30:06 +0800</pubDate>
+      
+      <guid>/2019/10/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;p&gt;很早之前就想自己搭建自己的个人博客，手上也有服务器、域名，一直拖到现在才开始做，记录下流程，以免以后忘了&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
